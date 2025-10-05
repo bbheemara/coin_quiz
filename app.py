@@ -46,11 +46,17 @@ def quiz():
 
 @app.route('/result')
 def result():
+    total_score = session["score"]
+    streak = session["streak"]
+    if total_score>=20:
+        msg = "Wow So Lucky!"
+    else:
+        msg = "Unlucky! same as me :("    
     session["score"] = 0
     session["streak"] = 0
     session["q_index"] = 0
 
-    return render_template('result.html')
+    return render_template('result.html',score=total_score,streak=streak,msg=msg)
 
 if __name__ == '__main__':
     

@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
-<body>
-    Result
+
+<body class="bg-dark">
+    <div class="justify-content-center align-items-center d-flex" style="margin-top: 250px;">
+        <div class="card bg-dark  shadow-lg border-0 text-center p-4" style="max-width: 700px; width: 100%;">
+            <div class="card-body text-white d-flex flex-column align-items-center  text-white">
+                <div>
+                    {{msg}}
+                </div>
+                <div class="">
+                    Score: {{score}}
+                </div>
+                <div>Streak: {{streak}}</div>
+
+            </div>
+            <div>
+                <form action="/quiz"> <button class="btn btn-success">Restrat</button></form>
+
+            </div>
+        </div>
+
+    </div>
+
 </body>
+
 </html>
