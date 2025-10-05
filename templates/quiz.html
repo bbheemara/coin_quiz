@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzzz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark d-flex justify-content-center align-items-center vh-100">
+
+    <div class="card bg-dark  shadow-lg border-0 text-center p-4" style="max-width: 700px; width: 100%;">
+        <div class="card-body">
+            <h4 class="mb-3 text-white">Question {{ q_index+1 }}</h4>
+            <p class="h5 mb-4  text-white">{{ q.text }}</p>
+            
+            <form action="" method="post" class="d-flex flex-column align-items-center  text-white">
+                <button type="submit" name="choice" value="A" class="btn btn-primary m-2 w-75">
+                    A: {{ q.A }}
+                </button>
+                <button type="submit" name="choice" value="B" class="btn btn-success m-2 w-75">
+                    B: {{ q.B }}
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

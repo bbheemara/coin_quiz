@@ -1,4 +1,4 @@
-from flask import Flask,render_template,url_for, session,redirect
+from flask import Flask,render_template,url_for, session,redirect,request
 from questions import questions
 
 app = Flask(__name__)
@@ -14,11 +14,43 @@ def start():
     session["q_index"] = 0
     return redirect(url_for("quiz"))
 
-@app.route('/quiz',methods=["GET", "POST"])
+@app.route('/quiz', methods=["GET", "POST"])
 def quiz():
-    ques_index = session.get("q_index", 0)
+    if "score" not in session:
+        session["score"] = 0
+    if "streak" not in session:
+        session["streak"] = 0
+    if "q_index" not in session:
+        session["q_index"] = 0
 
+    q_index = session["q_index"]
 
+    if q_index >= len(questions):
+        return redirect(url_for("result"))
+
+    q = questions[q_index]
+
+    if request.method == "POST":
+        selected = request.form.get('choice')
+        if selected == q["correct"]:
+            session["score"] += 10
+            session["streak"] += 1
+        else:
+            session["streak"] = 0
+
+        session["q_index"] = q_index + 1
+        return redirect(url_for('quiz'))
+
+    return render_template("quiz.html", q=q, q_index=q_index)
+    
+
+@app.route('/result')
+def result():
+    session["score"] = 0
+    session["streak"] = 0
+    session["q_index"] = 0
+
+    return render_template('result.html')
 
 if __name__ == '__main__':
     
