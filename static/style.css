@@ -1,0 +1,22 @@
+/* @font-face {
+  font-family: 'AnimeFont1';
+  src: url('fonts/font1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'AnimeFont2';
+  src: url('fonts/font2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+@font-face {
+  font-family: 'Font3';
+  src: url('../fonts/Asimovian-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+body {
+  font-family: 'Font3';
+}
