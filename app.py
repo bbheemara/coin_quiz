@@ -16,6 +16,8 @@ def start():
 
 @app.route('/quiz', methods=["GET", "POST"])
 def quiz():
+    coins = session.get("score", 0)
+    streak = session.get("streak", 0)
     if "score" not in session:
         session["score"] = 0
     if "streak" not in session:
@@ -33,6 +35,9 @@ def quiz():
     if request.method == "POST":
         selected = request.form.get('choice')
         if selected == q["correct"]:
+            coins = session["score"] + 10
+            streak = session["streak"] + 1
+
             session["score"] += 10
             session["streak"] += 1
         else:
@@ -40,8 +45,10 @@ def quiz():
 
         session["q_index"] = q_index + 1
         return redirect(url_for('quiz'))
+    coins = session.get("score", 0)
+    streak = session.get("streak", 0)
 
-    return render_template("quiz.html", q=q, q_index=q_index)
+    return render_template("quiz.html",coins=coins,streak=streak, q=q, q_index=q_index)
     
 
 @app.route('/result')
