@@ -1,8 +1,17 @@
 from flask import Flask,render_template,url_for, session,redirect,request
 from questions import questions
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = "hmmwhatisthiss..."
+
+CORS(app)
+
+@app.after_request
+def after_request(response): 
+    response.headers['Content-Security-Policy'] = "frame-ancestors *"
+    return response
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -34,7 +43,7 @@ def quiz():
 
     if request.method == "POST":
         selected = request.form.get('choice')
-        if selected == q["correct"]:
+        if selected == q["correct"]: 
             coins = session["score"] + 10
             streak = session["streak"] + 1
 
